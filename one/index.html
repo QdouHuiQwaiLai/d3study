@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<p>1111</p>
+<p>3213</p>
+<p>3213123</p>
+<script src="../d3/d3.js"></script>
+<script>
+d3.selectAll('p')
+  .data([5, 7, 9, 23, 12])
+  .style('color', (d, i) => {
+    return i % 2 ? '#fff' : 'red'
+  })
+// d3.select('body').style('background-color', 'black')
+const p = d3.select('body').selectAll('p')
+  .data([5, 7, 9, 23, 12])
+  .enter().append('p')
+  .text((d) => { 
+    console.log(d)
+    return `im number ${d} !` 
+    })
+</script>
+</body>
+</html>
