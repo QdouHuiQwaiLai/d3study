@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p>dog</p>
+    <p>cat</p>
+    <p>pig</p>
+    <p>dog</p>
+    <p>cat</p>
+    <p>pig</p>
+    <p>dog</p>
+    <p>cat</p>
+    <p>pig</p>
+    <p>dog</p>
+    <p>cat</p>
+    <p>pig</p>
+    <script src="../d3/d3.js"></script>
+<script>
+var str = 'hahahaz'
+const p = d3.select('body').selectAll('p')
+
+// datum 将数据绑定在所有的node上
+p.datum(str)
+  .text((d, i) => `第${i}个${d}动物`)
+// data 分别绑定在对应的node上
+// setTimeout(() => {
+//   p.data([1, 2, 3])
+//     .text((d, i) => `第${d}个`)
+// }, 5000)
+
+// p.data([1, 2]).exit().remove()
+
+// update enter exit
+// enter() exit()
+
+//
+p.text(function(d, i) {
+  if(i==3){
+    d3.select(this).style("color","red");
+  }
+  return i;
+})
+
+// append()：在选择集尾部插入元素
+// insert()：在选择集前面插入元素  
+</script>
+</body>
+</html>
