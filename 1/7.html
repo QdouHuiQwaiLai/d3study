@@ -16,7 +16,7 @@
   <body>
     <svg width="960" height="600"></svg>
     <script>
-    	var marge = {top:60,bottom:60,left:60,right:60}
+        var marge = {top:60,bottom:60,left:60,right:60}
     	var svg = d3.select("svg");//得到SVG画布
     	var width = svg.attr("width");//得到画布的宽
     	var height = svg.attr("height");//得到画布的长
@@ -38,6 +38,8 @@
     	g.append("g")
     		.attr("transform","translate("+0+","+(height-marge.top-marge.bottom)+")")
     		.call(xAxis);
+
+
     	g.append("g")
     		.attr("transform","translate(0,0)")
     		.call(yAxis);
@@ -46,31 +48,63 @@
     	var gs = g.selectAll(".rect")
     		.data(dataset)
     		.enter()
-    		.append("g");
+    		.append("g")
+			
     	
     	//绘制矩形
     	var rectPadding = 20;//矩形之间的间隙
-    	gs.append("rect")
-    		.attr("x",function(d,i){
+    var gg = gs.append("rect")
+    	.attr("x",function(d,i){
     			return xScale(i)+rectPadding/2;
-    		})	
-    		.attr("y",function(d){
-    			return yScale(d);
-    		})
-    		.attr("width",function(){
+    	})	
+    	.attr("y",function(d){
+				var min = yScale.domain()[0];
+    			return yScale(min);//可以得知，这里返回的是最大值
+    			// return yScale(d);
+    	})
+    	.attr("width",function(){
+				console.log(this)
     			return xScale.step()-rectPadding;
-    		})
-    		.attr("height",function(d){
-    			return height-marge.top-marge.bottom-yScale(d);
-    		})
-    		.attr("fill","blue");
+    	})
+    	.attr("height",function(d){
+    			// return height-marge.top-marge.bottom-yScale(d);
+				return 0	// 最初的状态
+    	})
+			.attr("fill","blue")
+			.transition()	// 添加过度
+			.duration(2000)	// 持续时间
+			.delay((d, i) => i*400)	// 延迟时间
+			// .ease(d3.easeElasticInOut)
+			.attr('y', (d) => yScale(d))
+			.attr('height', (d) => height-marge.top-marge.bottom-yScale(d))
+			.on('end', function () {
+				d3.select(this).on('mouseover', function () {
+					d3.select(this)
+						.transition()
+						.duration(1500)
+						.attr('fill', 'yellow')
+				})
+				d3.select(this).on('mouseout', function () {
+					d3.select(this)
+						.transition()
+						.duration(1500)
+						.attr('fill', 'blue')
+				})
+			})
+	console.log(gg)
+			// gs.selectAll('rect')
+		
+
+
     	//绘制文字
     	gs.append("text")
     		.attr("x",function(d,i){
     			return xScale(i)+rectPadding/2;
     		})
     		.attr("y",function(d){
-            return yScale(d);
+				var min = yScale.domain()[0];
+				return yScale(min);
+            	// return yScale(d);
         	})
         	.attr("dx",function(){
         		(xScale.step()-rectPadding)/2;
@@ -79,6 +113,15 @@
         	.text(function(d){
         		return d;
         	})
-    </script>
+			.transition()
+    		.duration(2000)
+    		.delay(function(d,i){
+    			return i*400;
+    		})
+    		//.ease(d3.easeElasticInOut)
+        	.attr("y",function(d){
+    			return yScale(d);
+    		})
+   </script>
   </body>
 </html>
