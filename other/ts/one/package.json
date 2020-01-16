@@ -1,0 +1,20 @@
+{
+  "name": "one",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:w": "tsc -w"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "TypeScript ": "^3.6.4"
+  },
+  "dependencies": {
+    "install": "^0.13.0",
+    "reflect-metadata": "^0.1.13",
+    "tslib": "^1.10.0"
+  }
+}
