@@ -10,5 +10,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/lodash": "^4.14.149",
+    "@types/ramda": "^0.26.39",
+    "lodash": "^4.17.15",
+    "ramda": "^0.26.1"
+  }
 }
