@@ -1,5 +1,5 @@
 import { curry } from 'lodash'
-import _, { split, map, filter, match, reduce, } from 'ramda'
+import _, { split, map, filter, match, reduce, compose, curry } from 'ramda'
 
 const Test: any = () => {
   const words = split('')
@@ -7,7 +7,8 @@ const Test: any = () => {
   // const filterQs = filter(match())
   var _keepHighest = (x:any, y:any) => x >= y ? x : y
   const max = reduce(_keepHighest, -Infinity)
-  var slice = _.curry((start, end, xs:string) => xs.slice(start, end))
+  console.log(-Infinity)
+  var slice = curry((start: any, end: any, xs:string) => xs.slice(start, end))
   var task = slice(0)
 }
 
@@ -20,5 +21,11 @@ export default () => {
   const hasSpaces = match(/\s+/g)
   const findSpaces = filter(hasSpaces);
   console.log(findSpaces(["tori_spelling", "tori amos"]))  // ["tori amos"]
+  Test()
+  console.log(reduce((x:any, y:any): any=> { 
+    console.log('r ' + x)
+    console.log('d ' + y)
+    return x+y
+   }, 5, [1, 2, 3, 4, 5]))
 }
 
